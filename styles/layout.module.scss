@@ -1,0 +1,92 @@
+@import 'core.scss';
+
+.main {
+  margin: 0;
+  padding: 0 0.8rem;
+}
+
+.header {
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  height: 4rem;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: calc($l * 1.25);
+  padding: 0 0.8rem 0;
+  width: 100%;
+
+  .logo {
+    display: block;
+    flex: 1;
+    max-width: 8rem;
+  }
+
+  .nav {
+    align-items: center;
+    display: flex;
+    flex: 5;
+    height: 100%;
+    justify-content: center;
+    text-align: center;
+
+    @media (max-width: $m) {
+      display: none;
+    }
+
+    a {
+      align-items: center;
+      display: flex;
+      font-size: 15px;
+      height: 100%;
+      margin: 0 1rem;
+      position: relative;
+    }
+
+    a:hover {
+      color: var(--red);
+    }
+
+    a.active::after {
+      background-color: var(--red);
+      content: '';
+      height: 4px;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+  }
+
+  .cart {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    font-size: 15px;
+    justify-content: flex-end;
+    max-width: 8rem;
+
+    span {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .cart:hover {
+    color: var(--red);
+    cursor: pointer;
+  }
+}
+
+.footer {
+  display: flex;
+  font-size: 15px;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: calc($l * 1.25);
+  padding: 1rem;
+  width: 100%;
+
+  .link:hover {
+    color: var(--red);
+  }
+}

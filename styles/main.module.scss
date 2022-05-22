@@ -1,0 +1,121 @@
+@import 'core.scss';
+
+.heading {
+  margin: 3rem auto;
+  max-width: $m;
+  text-align: center;
+}
+
+.filter {
+  margin: 0 auto;
+  max-width: $m;
+  text-align: center;
+
+  .tag {
+    background-color: transparent;
+    border: 2px solid var(--main);
+    border-radius: 20px;
+    color: var(--main);
+    display: inline-flex;
+    font-size: 12px;
+    font-weight: bold;
+    height: 40px;
+    justify-content: center;
+    line-height: 1;
+    margin: 0.25rem;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+
+    @media (max-width: $m) {
+      border-radius: 17.5px;
+      height: 35px;
+      padding: 0.4rem 0.8rem;
+    }
+
+    &:first-of-type span {
+      margin-right: 0.2rem;
+    }
+  }
+
+  .tag:hover:not(.selected) {
+    background-color: var(--line);
+    color: var(--main);
+    cursor: pointer;
+  }
+
+  .allTag {
+    display: block;
+    margin: 0.25rem auto;
+  }
+
+  .selected {
+    background-color: var(--main);
+    color: var(--white);
+    cursor: pointer;
+  }
+}
+
+.list {
+  overflow-x: scroll;
+  position: relative;
+}
+
+.scrollRight {
+  display: none;
+  font-size: 15px;
+  opacity: 0.5;
+  position: absolute;
+  right: 1rem;
+  text-align: right;
+  top: 3rem;
+
+  @media (min-width: $m) {
+    display: none;
+  }
+
+  span {
+    margin-right: 0.5rem;
+  }
+}
+
+.listInner {
+  margin: 5rem auto;
+  max-width: $m;
+  min-width: calc($s * 1.2);
+
+  .models {
+    margin-bottom: 2rem;
+  }
+
+  .models h2 {
+    font-size: 21px;
+    margin: 0.5rem 0;
+  }
+
+  .models ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.header {
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 0.5rem;
+}
+
+.header,
+.model {
+  display: flex;
+  font-size: 15px;
+
+  .col1,
+  .col4 {
+    flex: 1.5;
+  }
+
+  .col2,
+  .col3 {
+    flex: 1;
+  }
+}
