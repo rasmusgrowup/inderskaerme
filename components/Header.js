@@ -3,7 +3,7 @@ import Link from "next/link"
 import scss from '../styles/layout.module.scss'
 
 // Assets
-import Logo from '../public/Logo.png'
+import Logo from '../public/logo.png'
 import CartIcon from '../components/Icons/CartIcon'
 
 export default function Header() {
