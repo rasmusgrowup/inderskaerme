@@ -1,15 +1,92 @@
 @import 'core.scss';
 
-.heading {
+.heading,
+.message {
   margin: 3rem auto;
   max-width: $m;
   text-align: center;
 }
 
+.message {
+  background-color: var(--light);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  font-size: 15px;
+  margin-top: 1rem;
+  padding: 1.5rem;
+  position: relative;
+
+  .luk {
+    align-items: center;
+    background-color: var(--main);
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    height: 1.5rem;
+    justify-content: center;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 1.5rem;
+  }
+}
+
+.contactInfo {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.contactInfo a {
+  align-items: center;
+  display: flex;
+  margin-left: 1rem;
+
+  &:first-of-type::after {
+    border-right: 1px solid var(--main);
+    content: '';
+    height: 100%;
+    margin-left: 1rem;
+  }
+
+  &:hover {
+    color: var(--red);
+  }
+
+  span {
+    margin-right: 0.25rem;
+  }
+}
+
+.shop {
+  border-top: 1px solid var(--line);
+  margin: 0 auto;
+  max-width: calc($l * 1.25);
+  position: relative;
+  width: 100%;
+}
+
 .filter {
   margin: 0 auto;
-  max-width: $m;
-  text-align: center;
+  margin-top: 2rem;
+  text-align: left;
+
+  @media (min-width: $m) {
+    float: left;
+    height: 100%;
+    left: 1rem;
+    max-width: 300px;
+    position: sticky;
+    top: 2rem;
+    z-index: 99;
+  }
+
+  .overskrift {
+    font-size: 15px;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
 
   .tag {
     background-color: transparent;
@@ -20,7 +97,7 @@
     font-size: 12px;
     font-weight: bold;
     height: 40px;
-    justify-content: center;
+    justify-content: flex-start;
     line-height: 1;
     margin: 0.25rem;
     text-transform: uppercase;
@@ -29,6 +106,7 @@
     @media (max-width: $m) {
       border-radius: 17.5px;
       height: 35px;
+      justify-content: center;
       padding: 0.4rem 0.8rem;
     }
 
@@ -45,7 +123,7 @@
 
   .allTag {
     display: block;
-    margin: 0.25rem auto;
+    margin: 0.25rem auto 0.25rem 0.25rem;
   }
 
   .selected {
@@ -56,32 +134,19 @@
 }
 
 .list {
-  overflow-x: scroll;
   position: relative;
-}
-
-.scrollRight {
-  display: none;
-  font-size: 15px;
-  opacity: 0.5;
-  position: absolute;
-  right: 1rem;
-  text-align: right;
-  top: 3rem;
+  max-width: calc($l * 1.25);
+  margin: 0 auto;
+  right: 0;
 
   @media (min-width: $m) {
-    display: none;
-  }
-
-  span {
-    margin-right: 0.5rem;
+    margin-left: calc(330px + 2rem);
   }
 }
 
 .listInner {
-  margin: 5rem auto;
+  margin: 2rem 0 0 auto;
   max-width: $m;
-  min-width: calc($s * 1.2);
 
   .models {
     margin-bottom: 2rem;
@@ -101,13 +166,9 @@
 
 .header {
   border-bottom: 1px solid var(--line);
-  margin-bottom: 0.5rem;
-}
-
-.header,
-.model {
   display: flex;
   font-size: 15px;
+  margin-bottom: 0.5rem;
 
   .col1,
   .col4 {
@@ -117,5 +178,130 @@
   .col2,
   .col3 {
     flex: 1;
+  }
+}
+
+.row {
+  align-items: stretch;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.model {
+  background-color: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  display: inline-block;
+  font-size: 15px;
+  margin: 6px;
+  max-width: 265px;
+  width: 100%;
+  padding: 0.75em;
+  position: relative;
+
+  &:before {
+    -webkit-box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.05);
+    border-radius: 9px;
+    bottom: 0;
+    //content: '';
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+  }
+
+  &:hover {
+    border-color: #000;
+    cursor: pointer;
+  }
+
+  @media (max-width: $m) {
+    max-width: 100%;
+  }
+
+  span {
+    display: block;
+    opacity: 0.75;
+  }
+
+  span.name,
+  span.pris {
+    margin-bottom: 6px;
+    font-weight: 600;
+    opacity: 1;
+  }
+
+  span.pris {
+    margin-top: 6px;
+  }
+}
+
+.order {
+  background-color: var(--white);
+  bottom: 1rem;
+  border-radius: 9px;
+  -webkit-box-shadow: 0px 0px 200px 0px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px 0px 200px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 0px 200px 0px rgba(0, 0, 0, 0.4);
+  max-width: 440px;
+  padding: 1rem;
+  position: fixed;
+  right: 1rem;
+  transform: translateY(200%);
+  z-index: 99;
+  width: 100%;
+
+  @media (max-width: $m) {
+    bottom: 0;
+    border-radius: 0;
+    padding-bottom: 3rem;
+    right: 0;
+  }
+}
+
+.showOrder {
+  transform: translateY(0%);
+  transition: 0.4s;
+}
+
+.ordreListe {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  list-style: none;
+  font-size: 15px;
+  padding: 1rem;
+  z-index: 1;
+
+  li {
+    opacity: 0.5;
+  }
+
+  li:first-of-type,
+  li:last-of-type {
+    opacity: 1;
+  }
+
+  li:last-of-type {
+    margin-top: 6px;
+  }
+}
+
+.anuller {
+  background-color: var(--white);
+  border: 1px solid var(--main);
+  border-radius: 9px;
+  color: var(--main);
+  cursor: pointer;
+  display: block;
+  font-size: 15px;
+  height: 3rem;
+  margin-top: 0.25rem;
+  width: 100%;
+
+  &:hover {
+    background-color: var(--line);
   }
 }

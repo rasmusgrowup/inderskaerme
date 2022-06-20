@@ -1,0 +1,37 @@
+@import 'core.scss';
+
+.submit {
+  background-color: var(--main);
+  border: 1px solid var(--main);
+  border-radius: 9px;
+  color: var(--white);
+  cursor: pointer;
+  display: block;
+  font-size: 15px;
+  height: 3rem;
+  width: 100%;
+
+  &:hover {
+    background-color: #373737;
+    border-color: #373737;
+  }
+}
+
+.name,
+.email {
+  margin-bottom: 1rem;
+  width: 100%;
+
+  label {
+    display: block;
+  }
+
+  input {
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    font-size: 16px;
+    height: 3rem;
+    padding: 0.5rem;
+    width: 100%;
+  }
+}
