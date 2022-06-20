@@ -65,7 +65,7 @@ export default function Home({ maerker }) {
     <>
       <section className={scss.heading}>
         <h1>Bestil plast-inderskærme til din bil her</h1>
-        <p>I vores sortiment finder du plast inderskærme til en lang række biler til gode priser. Bestil plast-inderskærme til din bil ved at filtrere i mærkerne herunder, og herefter klikke på varen du ønsker. Ordren er først afgivet, når du har angivet dit navn og email-adresse, og har klikket på knappen 'Afgiv bestilling'. Du kan også ringe eller skrive til os.</p>
+        <p>I vores sortiment finder du plast inderskærme til en lang række biler til gode priser. Bestil plast-inderskærme til din bil ved at filtrere i mærkerne herunder, og herefter klikke på varen du ønsker. Ordren er først afgivet, når du har angivet dit navn og email-adresse, og har klikket på knappen &apos;Afgiv bestilling&apos;. Du kan også ringe eller skrive til os.</p>
         <div className={scss.contactInfo}>
           <Link href='tel:+4529625995'>
             <a>
