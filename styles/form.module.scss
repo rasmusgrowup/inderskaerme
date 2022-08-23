@@ -1,5 +1,10 @@
 @import 'core.scss';
 
+.form {
+  margin: 0 auto;
+  max-width: $m;
+}
+
 .submit {
   background-color: var(--main);
   border: 1px solid var(--main);
@@ -18,20 +23,45 @@
 }
 
 .name,
-.email {
+.email,
+.phone,
+.address,
+.comment {
   margin-bottom: 1rem;
   width: 100%;
 
   label {
     display: block;
+    font-size: 0.8em;
   }
 
-  input {
+  input,
+  textarea {
     border: 1px solid var(--line);
     border-radius: 9px;
     font-size: 16px;
     height: 3rem;
+    max-width: 100%;
     padding: 0.5rem;
     width: 100%;
+  }
+}
+
+.secondAddressButton {
+  align-items: center;
+  display: flex;
+
+  .addSecondAddress {
+    align-items: center;
+    background-color: var(--main);
+    border-radius: 1em;
+    color: var(--white);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    font-size: 0.8em;
+    height: 2em;
+    margin-left: 0.5em;
+    padding: 0 1em;
   }
 }

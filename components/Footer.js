@@ -7,7 +7,9 @@ export default function Footer() {
     <>
       <footer className={scss.footer}>
         <span>© {new Date().getFullYear()} Tektrol Anti Rust A/S</span>
-        <span className={scss.link}><Link href='https://tektrol.dk'><a>gå til tektrol.dk</a></Link></span>
+        <Link href='https://tektrol.dk'>
+          <a className={scss.link}>gå til tektrol.dk</a>
+        </Link>
       </footer>
     </>
   )

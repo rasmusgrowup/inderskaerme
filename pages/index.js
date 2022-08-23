@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from "next/link"
+import { useRouter } from 'next/router'
 import scss from '../styles/main.module.scss'
 import { useState, useEffect, useRef, useContext } from 'react'
 
@@ -55,11 +56,18 @@ export default function Home({ maerker }) {
   const [showOrder, setShowOrder] = useState(false)
   const [filtered, setFiltered ] = useState(data);
   const [cart, setCart] = useContext(CartContext);
+  const router = useRouter()
+
+  const tilBestilling = () => {
+    router.push('/bestil')
+  }
 
   const handleClick = (event, model) => {
     setCart(model)
     setShowOrder(true)
   }
+
+  console.log(filtered)
 
   return (
     <>
@@ -109,28 +117,27 @@ export default function Home({ maerker }) {
                 </h2>
                 <ul className={scss.row}>
                   { modeller.map((model) => (
-                    model.varenummer.lager === true ? (
-                      <li
-                        className={scss.model}
-                        key={model.id}
-                        onClick={event => handleClick(event, model)}
-                        >
-                        <span className={scss.name}>
-                          {model.model}
-                        </span>
-                        <span className={scss.year}>
+                    <li
+                      className={scss.model}
+                      key={model.id}
+                      onClick={event => handleClick(event, model)}
+                      >
+                      { model.aar &&
+                        <div className={scss.year}>
                           Årgang: {model.aar}
-                        </span>
-                        <span className={scss.sku}>
+                        </div>
+                      }
+                      { model.varenummer.varenummer &&
+                        <div className={scss.sku}>
                           Varenummer: {model.varenummer.varenummer}
-                        </span>
-                        <span className={scss.comment}>{model.kommentar}</span>
-                        <span className={scss.pris}>
-                          DKK {model.varenummer.pris} ex. moms
-                        </span>
-                      </li>
-                    )
-                      : null
+                        </div>
+                      }
+                      {model.kommentar &&
+                        <div className={scss.comment}>
+                          {model.kommentar}
+                        </div>
+                      }
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -145,7 +152,7 @@ export default function Home({ maerker }) {
           : `${scss.hideOrder}
           `}
         `}>
-        <p>Du er igang med at bestille:</p>
+        <p>Du er ved at bestille:</p>
         { cart !== null
           ? <ul className={scss.ordreListe}>
             <li>Flad aluminumsplade</li>
@@ -153,12 +160,13 @@ export default function Home({ maerker }) {
             <li>{cart.varenummer.varenummer}</li>
             <li>{cart.aar}</li>
             <li>{cart.comment}</li>
-            <li>DKK {cart.varenummer.pris} ex. moms</li>
           </ul>
           :
           <></>
         }
-        <Order />
+        <button className={scss.videre} onClick={tilBestilling}>
+          Gå til bestillingssiden
+        </button>
         <button
         className={scss.anuller}
         onClick={() => setShowOrder(false)}>

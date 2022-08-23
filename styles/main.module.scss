@@ -122,7 +122,7 @@
   }
 
   .allTag {
-    display: block;
+    display: inline-block;
     margin: 0.25rem auto 0.25rem 0.25rem;
   }
 
@@ -289,6 +289,7 @@
   }
 }
 
+.videre,
 .anuller {
   background-color: var(--white);
   border: 1px solid var(--main);
@@ -304,4 +305,18 @@
   &:hover {
     background-color: var(--line);
   }
+}
+
+.videre {
+  background-color: var(--main);
+  color: var(--white);
+
+  &:hover {
+    background-color: grey;
+  }
+}
+
+.bestilling {
+  margin: 3rem auto;
+  max-width: $m;
 }

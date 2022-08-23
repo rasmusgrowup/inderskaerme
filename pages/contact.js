@@ -13,8 +13,6 @@ import PhoneIcon from '../components/Icons/PhoneIcon'
 export default function Contact() {
   const [cart, setCart] = useContext(CartContext);
 
-  console.log(cart)
-
   return (
     <>
       <section className={scss.heading}>
