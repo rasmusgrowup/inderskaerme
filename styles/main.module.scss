@@ -65,12 +65,17 @@
   max-width: calc($l * 1.25);
   position: relative;
   width: 100%;
+
+  @media (max-width: $m) {
+    border: none;
+  }
 }
 
 .filter {
   margin: 0 auto;
   margin-top: 2rem;
   text-align: left;
+  width: 100%;
 
   @media (min-width: $m) {
     float: left;
@@ -81,55 +86,119 @@
     top: 2rem;
     z-index: 99;
   }
+}
 
-  .overskrift {
-    font-size: 15px;
-    margin-bottom: 1rem;
-    opacity: 0.5;
-  }
+.filterInner {
+  width: 100%;
 
-  .tag {
-    background-color: transparent;
+  .searchBar {
     border: 2px solid var(--main);
-    border-radius: 20px;
-    color: var(--main);
-    display: inline-flex;
-    font-size: 12px;
-    font-weight: bold;
-    height: 40px;
-    justify-content: flex-start;
-    line-height: 1;
+    border-radius: 12px;
+    font-size: 14px;
     margin: 0.25rem;
-    text-transform: uppercase;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem;
+    width: calc(100% - 0.5rem);
 
     @media (max-width: $m) {
-      border-radius: 17.5px;
-      height: 35px;
-      justify-content: center;
-      padding: 0.4rem 0.8rem;
-    }
-
-    &:first-of-type span {
-      margin-right: 0.2rem;
+      font-size: 16px;
     }
   }
 
-  .tag:hover:not(.selected) {
-    background-color: var(--line);
-    color: var(--main);
-    cursor: pointer;
+  .searchIcon {
+    height: 18px;
+    position: absolute;
+    right: 22px;
+    top: 16px;
   }
 
-  .allTag {
-    display: inline-block;
-    margin: 0.25rem auto 0.25rem 0.25rem;
-  }
-
-  .selected {
-    background-color: var(--main);
-    color: var(--white);
+  .filterContainer {
+    border: 2px solid var(--main);
+    border-radius: 12px;
     cursor: pointer;
+    font-size: 12px;
+    margin: 0.25rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    position: relative;
+    width: calc(100% - 0.5rem);
+
+    @media (max-width: $m) {
+      font-size: 16px;
+    }
+
+    .openDropdown {
+      display: inherit;
+    }
+
+    .closeDropdown {
+      display: none;
+    }
+
+    @media (max-width: $m) {
+      .openDropdown {
+        display: none;
+      }
+
+      .closeDropdown {
+        display: inherit;
+      }
+    }
+
+    .filterIcon {
+      height: 18px;
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      pointer-events: none;
+    }
+
+    .overskrift {
+      font-size: 14px;
+      margin: 0.25rem;
+      opacity: 0.5;
+      position: relative;
+    }
+
+    .tag {
+      align-items: center;
+      background-color: transparent;
+      border: none;
+      border-radius: 6px;
+      color: var(--main);
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: bold;
+      height: 30px;
+      justify-content: flex-start;
+      line-height: 1;
+      margin: 0.25rem;
+      text-transform: uppercase;
+
+      @media (max-width: $m) {
+        justify-content: center;
+        padding: 0.4rem 0.8rem;
+      }
+
+      &:first-of-type span {
+        margin-right: 0.2rem;
+      }
+    }
+
+    .tag:hover:not(.selected) {
+      background-color: var(--line);
+      color: var(--main);
+      cursor: pointer;
+    }
+
+    .allTag {
+      display: inline-block;
+      margin: 0.25rem auto 0.25rem 0.25rem;
+    }
+
+    .selected {
+      background-color: var(--line);
+      cursor: pointer;
+    }
   }
 }
 
@@ -165,7 +234,7 @@
 }
 
 .header {
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--light);
   display: flex;
   font-size: 15px;
   margin-bottom: 0.5rem;
@@ -220,6 +289,16 @@
 
   @media (max-width: $m) {
     max-width: 100%;
+  }
+
+  .name {
+    color: var(--main);
+  }
+
+  .year,
+  .sku,
+  .comment {
+    opacity: 0.6;
   }
 
   span {

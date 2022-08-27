@@ -13,7 +13,7 @@ body {
     Droid Sans,
     Helvetica Neue,
     sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5;
   margin: 0;
   padding: 0;
@@ -32,6 +32,6 @@ a {
   --main: #070707;
   --red: #e6332a;
   --white: #fff;
-  --line: #E5E5E5;
+  --line: #e5e5e5;
   --light: #F8F8F8;
 }
