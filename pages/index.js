@@ -128,7 +128,10 @@ export default function Home({ maerker, modeller }) {
               <i className={scss.filterIcon}><FilterIcon /></i>
               <div className={ dropdown ? `${scss.closeDropdown}` : `${scss.openDropdown}`}>
                 <button className={
-                  `${scss.tag} ${scss.allTag} ${filtered === data ? `${scss.selected}` : ''}`} onClick={() => setFiltered(data)}>Alle
+                  `${scss.tag} ${scss.allTag} ${filtered === data ? `${scss.selected}` : ''}`} onClick={() => setFiltered(data)}>
+                  <span>
+                    Alle
+                  </span>
                 </button>
                 { data.map((tag) => (
                   <button key={tag.id} type='button' className={`${scss.tag} ${tag === filtered[0] && filtered != data ? `${scss.selected}` : ''}`} onClick={() => setFiltered([tag])}>
