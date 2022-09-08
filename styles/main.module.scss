@@ -134,16 +134,6 @@
       display: none;
     }
 
-    @media (max-width: $m) {
-      .openDropdown {
-        display: none;
-      }
-
-      .closeDropdown {
-        display: inherit;
-      }
-    }
-
     .filterIcon {
       height: 18px;
       position: absolute;
@@ -263,10 +253,11 @@
   background-color: var(--white);
   border: 1px solid var(--line);
   border-radius: 9px;
-  display: inline-block;
+  display: inline-flex;
   font-size: 15px;
-  margin: 6px;
-  max-width: 265px;
+  justify-content: space-between;
+  margin: 3px 6px;
+  /*max-width: 265px;*/
   width: 100%;
   padding: 0.75em;
   position: relative;
@@ -291,17 +282,21 @@
   }
 
   @media (max-width: $m) {
+    display: inline-block;
     max-width: 100%;
   }
 
   .name {
     color: var(--main);
+    flex: 1;
   }
 
   .year,
   .sku,
+  .forBag,
   .comment {
     opacity: 0.6;
+    flex: 1;
   }
 
   span {
@@ -361,13 +356,8 @@
     opacity: 0.5;
   }
 
-  li:first-of-type,
-  li:last-of-type {
+  li:first-of-type {
     opacity: 1;
-  }
-
-  li:last-of-type {
-    margin-top: 6px;
   }
 }
 

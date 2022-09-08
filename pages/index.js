@@ -26,11 +26,12 @@ const GetAll = gql`
     maerker(orderBy: navn_ASC) {
       id
       navn
-      modeller {
+      modeller(orderBy: model_ASC) {
         id
         model
         aar
         forBag
+        type
         kommentar
         varenummer {
           id
@@ -85,13 +86,13 @@ export default function Home({ maerker, modeller }) {
     setLoaded(true)
   }, [])
 
-  console.log(dropdown)
+  console.log(data)
 
   return (
     <>
       <section className={scss.heading}>
         <h1>Bestil plast-inderskærme til din bil her</h1>
-        <p>I vores sortiment finder du plast inderskærme til en lang række biler til gode priser. Bestil plast-inderskærme til din bil ved at filtrere i mærkerne herunder, og herefter klikke på varen du ønsker. Ordren er først afgivet, når du har angivet dit navn og email-adresse, og har klikket på knappen &apos;Afgiv bestilling&apos;. Du kan også ringe eller skrive til os.</p>
+        <p>I vores sortiment finder du plast inderskærme til en lang række biler til gode priser. Bestil fra listen herunder. Du kan også ringe eller skrive til os.</p>
         <div className={scss.contactInfo}>
           <Link href='tel:+4529625995'>
             <a>
@@ -114,7 +115,7 @@ export default function Home({ maerker, modeller }) {
               <input
                 className={scss.searchBar}
                 type="text"
-                placeholder="Søg efter mærke"
+                placeholder="Søg efter modelnavn"
                 onChange={(event) => {
                   setSearchTerm(event.target.value);
                 }}
@@ -126,7 +127,7 @@ export default function Home({ maerker, modeller }) {
                 Filtrér efter mærke ({data.length})
               </div>
               <i className={scss.filterIcon}><FilterIcon /></i>
-              <div className={ dropdown ? `${scss.closeDropdown}` : `${scss.openDropdown}`}>
+              <div className={ dropdown ? `${scss.openDropdown}` : `${scss.closeDropdown}`}>
                 <button className={
                   `${scss.tag} ${scss.allTag} ${filtered === data ? `${scss.selected}` : ''}`} onClick={() => setFiltered(data)}>
                   <span>
@@ -180,7 +181,7 @@ export default function Home({ maerker, modeller }) {
                         >
                         { model.model &&
                           <div className={scss.name}>
-                            Model: {model.model}
+                            {model.model}
                           </div>
                         }
                         { model.aar &&
@@ -188,14 +189,9 @@ export default function Home({ maerker, modeller }) {
                             Årgang: {model.aar}
                           </div>
                         }
-                        { model.varenummer.varenummer &&
-                          <div className={scss.sku}>
-                            Varenummer: {model.varenummer.varenummer}
-                          </div>
-                        }
-                        {model.kommentar &&
-                          <div className={scss.comment}>
-                            {model.kommentar}
+                        { model.forBag &&
+                          <div className={scss.forBag}>
+                            For/bag: {model.forBag}
                           </div>
                         }
                       </div>
@@ -218,11 +214,10 @@ export default function Home({ maerker, modeller }) {
         <p>Du er ved at bestille:</p>
         { cart !== null
           ? <ul className={scss.ordreListe}>
-            <li>Flad aluminumsplade</li>
             <li>{cart.model}</li>
-            <li>{cart.varenummer.varenummer}</li>
-            <li>{cart.aar}</li>
-            <li>{cart.comment}</li>
+            { cart.type && <li>Type: {cart.type}</li>}
+            <li>Varenummer: {cart.varenummer.varenummer}</li>
+            <li>Årgang: {cart.aar}</li>
           </ul>
           :
           <></>
