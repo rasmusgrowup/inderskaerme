@@ -91,13 +91,16 @@
 .filterInner {
   width: 100%;
 
+  .searchBarContainer {
+    margin: 0.25rem;
+  }
+
   .searchBar {
     border: 2px solid var(--main);
     border-radius: 12px;
     font-size: 14px;
-    margin: 0.25rem;
     padding: 0.75rem;
-    width: calc(100% - 0.5rem);
+    width: 100%;
 
     @media (max-width: $m) {
       font-size: 16px;
@@ -107,7 +110,7 @@
   .searchIcon {
     height: 18px;
     position: absolute;
-    right: 22px;
+    right: 18px;
     top: 16px;
   }
 
@@ -117,10 +120,14 @@
     cursor: pointer;
     font-size: 12px;
     margin: 0.25rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.4rem;
     padding: 0.5rem;
     position: relative;
     width: calc(100% - 0.5rem);
+
+    &:last-of-type {
+      margin-bottom: 1rem;
+    }
 
     @media (max-width: $m) {
       font-size: 16px;
