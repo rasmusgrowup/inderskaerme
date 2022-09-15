@@ -107,22 +107,15 @@ export default function Home({ maerker, modeller, __type }) {
   return (
     <>
       <section className={scss.heading}>
-        <h1>Bestil plast-inderskærme til din bil her</h1>
-        <p>I vores sortiment finder du plast inderskærme til en lang række biler til gode priser. Bestil fra listen herunder. Du kan også ringe eller skrive til os.</p>
-        <div className={scss.contactInfo}>
-          <Link href='tel:+4529625995'>
-            <a>
-              <span>Ring til os</span>
-              <PhoneIcon />
-            </a>
-          </Link>
-          <Link href='mailto:inderskaerme@tektrol.dk'>
-            <a>
-              <span>Skriv os en mail</span>
-              <MailIcon />
-            </a>
-          </Link>
-        </div>
+        <h1>Inderskærme</h1>
+        <h2>Fra Austin Healey til Aygo X</h2>
+        <p>Hér på siden finder du de skærme du søger - og du bestiller med få klik.</p>
+        <p style={{ opacity: '0.5' }}>
+          Kun salg til CVR-nr.<br />
+          Ved bestilling før kl. 11:30 sender vi samme dag<br />
+          Priser: Flade alu./plast: DKK 750,- pr. sæt. Formstøbte Lokari-skærme: DKK 850 pr. sæt<br />
+          Pris er ekskl. fragt og moms. DK-fragt: 60 DKK<br />
+        </p>
       </section>
       <section className={scss.shop}>
         <div className={scss.filter}>
@@ -175,7 +168,11 @@ export default function Home({ maerker, modeller, __type }) {
                   <button key={i} className={
                   `${scss.tag} ${scss.allTag} ${type === t.name ? `${scss.selected}` : ''}`} onClick={() => setType(t.name)}>
                     <span>
-                      {t.name}
+                      { t.name == 'Alu_flad' ? 'Aluminium (flad)' :
+                        t.name == 'Plast_flad' ? 'Plast (flad)' :
+                        t.name == 'Plast_stoebt' ? 'Plast (støbt)' :
+                        t.name == 'Anden' ? 'anden' : t.name
+                      }
                     </span>
                   </button>
                 ))}
@@ -191,7 +188,7 @@ export default function Home({ maerker, modeller, __type }) {
                 if (searchTerm == "" && type == "") {
                   return val
                 } else if (
-                  val.modeller.some(y => (y.maerke.navn.toLowerCase() + ' ' + y.model.toLowerCase()).includes(searchTerm.toLowerCase()))
+                  val.modeller.some(y => (y.typer.toLowerCase() === type.toLowerCase() || type == "") && (y.maerke.navn.toLowerCase() + ' ' + y.model.toLowerCase()).includes(searchTerm.toLowerCase()))
                 ) {
                   return val
                 }
@@ -200,14 +197,19 @@ export default function Home({ maerker, modeller, __type }) {
                   <h2>
                     {navn}
                   </h2>
+                  <div className={scss.infos}>
+                    <div>Model</div>
+                    <div>Årgang</div>
+                    <div>For / bag</div>
+                  </div>
                   <div className={scss.row} ref={rowRef}>
-                    { modeller.filter((mod) => {
+                    { modeller.filter((v) => {
                       if (searchTerm == "" && type == "") {
-                        return mod
+                        return v
                       } else if (
-                        (mod.maerke.navn.toLowerCase() + ' ' + mod.model.toLowerCase()).includes(searchTerm.toLowerCase())
+                        (v.typer.toLowerCase() === type.toLowerCase() || type == "") && (v.maerke.navn.toLowerCase() + ' ' + v.model.toLowerCase()).includes(searchTerm.toLowerCase())
                       ) {
-                        return mod
+                        return v
                       }
                     }).map((model) => (
                       <div
@@ -222,12 +224,12 @@ export default function Home({ maerker, modeller, __type }) {
                         }
                         { model.aar &&
                           <div className={scss.year}>
-                            Årgang: {model.aar}
+                            {model.aar}
                           </div>
                         }
                         { model.forBag &&
                           <div className={scss.forBag}>
-                            For/bag: {model.forBag}
+                            {model.forBag}
                           </div>
                         }
                       </div>
