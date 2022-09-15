@@ -6,10 +6,7 @@ export default function Footer() {
   return (
     <>
       <footer className={scss.footer}>
-        <span>© {new Date().getFullYear()} Tektrol Anti Rust A/S</span>
-        <Link href='https://tektrol.dk'>
-          <a className={scss.link}>gå til tektrol.dk</a>
-        </Link>
+        © {new Date().getFullYear()} Tektrol Mineralolier A/S, Bondovej 17, 5250 Odense SV, Tlf. 66 11 81 40, CVR-nr. 16321389
       </footer>
     </>
   )

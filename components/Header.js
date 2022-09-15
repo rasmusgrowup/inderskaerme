@@ -20,9 +20,6 @@ export default function Header() {
           <Link href='/'>
             <a className={ router.pathname === '/' ? `${scss.active}` : ''}>Inderskærme</a>
           </Link>
-          <Link href='/contact'>
-            <a className={ router.pathname === '/contact' ? `${scss.active}` : ''}>Kontakt os</a>
-          </Link>
         </nav>
       </header>
     </>
