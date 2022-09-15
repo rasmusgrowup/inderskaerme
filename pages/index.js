@@ -40,6 +40,9 @@ const GetAll = gql`
           varenummer
           pris
         }
+        maerke {
+          navn
+        }
       }
     }
     modeller(orderBy: model_ASC) {
@@ -95,9 +98,11 @@ export default function Home({ maerker, modeller, __type }) {
 
   useEffect(() => {
     setLoaded(true)
+    const a = 'Alfa Romeo'
+    const b = '145'
+    const c = a.concat(' ', b)
+    console.log(a + ' ' + b)
   }, [])
-
-  console.log(type)
 
   return (
     <>
@@ -126,7 +131,7 @@ export default function Home({ maerker, modeller, __type }) {
               <input
                 className={scss.searchBar}
                 type="text"
-                placeholder="Søg efter modelnavn"
+                placeholder="Søg på mærke eller modelnavn"
                 onChange={(event) => {
                   setSearchTerm(event.target.value);
                 }}
@@ -185,25 +190,24 @@ export default function Home({ maerker, modeller, __type }) {
               { filtered.filter((val) => {
                 if (searchTerm == "" && type == "") {
                   return val
-                } else if (val.modeller.some(v =>
-                  (v.typer.toLowerCase() === type.toLowerCase() || type == "") && v.model.toLowerCase().includes(searchTerm.toLowerCase())
-                  )
+                } else if (
+                  val.modeller.some(y => (y.maerke.navn.toLowerCase() + ' ' + y.model.toLowerCase()).includes(searchTerm.toLowerCase()))
                 ) {
                   return val
                 }
-              }).map(({navn, id, modeller}) => (
+              }).map(({navn, id, modeller, maerke}) => (
                 <div className={scss.models} key={id} ref={listRef}>
                   <h2>
                     {navn}
                   </h2>
                   <div className={scss.row} ref={rowRef}>
-                    { modeller.filter((val) => {
+                    { modeller.filter((mod) => {
                       if (searchTerm == "" && type == "") {
-                        return val
+                        return mod
                       } else if (
-                        (val.typer.toLowerCase() == type.toLowerCase() || type == "") && val.model.toLowerCase().includes(searchTerm.toLowerCase())
+                        (mod.maerke.navn.toLowerCase() + ' ' + mod.model.toLowerCase()).includes(searchTerm.toLowerCase())
                       ) {
-                        return val
+                        return mod
                       }
                     }).map((model) => (
                       <div
@@ -213,7 +217,7 @@ export default function Home({ maerker, modeller, __type }) {
                         >
                         { model.model &&
                           <div className={scss.name}>
-                            {model.model}
+                            {model.maerke.navn} {model.model}
                           </div>
                         }
                         { model.aar &&
