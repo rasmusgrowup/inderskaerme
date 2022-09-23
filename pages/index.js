@@ -104,6 +104,8 @@ export default function Home({ maerker, modeller, __type }) {
     console.log(a + ' ' + b)
   }, [])
 
+  console.log(cart)
+
   return (
     <>
       <section className={scss.heading}>
@@ -158,7 +160,7 @@ export default function Home({ maerker, modeller, __type }) {
               </div>
             </div>
             <div className={scss.filterContainer} >
-              <div className={scss.overskrift} onClick={handleDropdown}>
+              <div className={scss.overskrift}>
                 Filtrér efter type
               </div>
               <i className={scss.filterIcon}><FilterIcon /></i>
@@ -176,7 +178,7 @@ export default function Home({ maerker, modeller, __type }) {
                       { t.name == 'Alu_flad' ? 'Aluminium (flad)' :
                         t.name == 'Plast_flad' ? 'Plast (flad)' :
                         t.name == 'Plast_stoebt' ? 'Plast (støbt)' :
-                        t.name == 'Anden' ? 'anden' : t.name
+                        t.name == 'Anden' ? 'Anden' : t.name
                       }
                     </span>
                   </button>
@@ -257,10 +259,11 @@ export default function Home({ maerker, modeller, __type }) {
         <p>Du er ved at bestille:</p>
         { cart !== null
           ? <ul className={scss.ordreListe}>
-            <li>{cart.model}</li>
+            <li>{cart.maerke.navn} {cart.model}</li>
             { cart.type && <li>Type: {cart.type}</li>}
             <li>Varenummer: {cart.varenummer.varenummer}</li>
             <li>Årgang: {cart.aar}</li>
+            { cart.kommentar && <li>{cart.kommentar}</li>} 
           </ul>
           :
           <></>

@@ -50,12 +50,11 @@ const Order = () => {
         required/>
       </div>
       <div className={scss.phone}>
-        <label>Telefonnummer *</label>
+        <label>Telefonnummer</label>
         <input
         type="phone"
         name="from_phone"
-        placeholder="+45 12 34 56 78"
-        required/>
+        placeholder="+45 12 34 56 78"/>
       </div>
       <h3>Leveringsadresse</h3>
       <div className={scss.address}>
@@ -66,11 +65,10 @@ const Order = () => {
         required/>
       </div>
       <div className={scss.address}>
-        <label>Evt. etage *</label>
+        <label>Evt. etage</label>
         <input
         type="text"
-        name="from_floor"
-        required/>
+        name="from_floor"/>
       </div>
       <div className={scss.address}>
         <label>By *</label>

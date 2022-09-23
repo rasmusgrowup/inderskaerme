@@ -13,11 +13,17 @@ export default function Bestil() {
         <h1>Du er ved at bestille følgende:</h1>
         { cart !== null
           ? <ul className={scss.ordreListe}>
-            <li>Flad aluminumsplade</li>
-            <li>{cart.model}</li>
-            <li>{cart.varenummer.varenummer}</li>
-            <li>{cart.aar}</li>
-            <li>{cart.comment}</li>
+            <li>{cart.maerke.navn} {cart.model}</li>
+            <li>Varenummer: {cart.varenummer.varenummer}</li>
+            <li>Type:
+              { cart.typer == 'Alu_flad' ? ' Aluminium (flad)' :
+                cart.typer == 'Plast_flad' ? ' Plast (flad)' :
+                cart.typer == 'Plast_stoebt' ? ' Plast (støbt)' :
+                cart.typer == 'Anden' ? ' Anden' : cart.typer
+              }
+            </li>
+            <li>Årgang: {cart.aar}</li>
+            { cart.kommentar && <li>OBS: {cart.kommentar}</li> }
           </ul>
           :
           <></>
