@@ -28,11 +28,11 @@ const Order = () => {
 
   return (
     <form ref={form} onSubmit={sendEmail} className={scss.form}>
-      <div className={scss.order}>
-        <input style={{ display: 'none' }} type="text" name="model" defaultValue={cart !== null ? `${cart.model}` : '0'} required/>
-        <input style={{ display: 'none' }} type="text" name="sku" defaultValue={cart !== null ? `${cart.varenummer.varenummer}` : '0'} required/>
-        <input style={{ display: 'none' }} type="text" name="aar" defaultValue={cart !== null ? `${cart.aar}` : '0'} required/>
-        <input style={{ display: 'none' }} type="text" name="aar" defaultValue={cart !== null ? `${cart.typer}` : '0'} required/>
+      <div className={scss.order} style={{ display: 'none' }}>
+        <input type="text" name="model" defaultValue={cart !== null ? `${cart.model}` : '0'} required/>
+        <input type="text" name="sku" defaultValue={cart !== null ? `${cart.varenummer.varenummer}` : '0'} required/>
+        <input type="text" name="aar" defaultValue={cart !== null ? `${cart.aar}` : '0'} required/>
+        <input type="text" name="type" defaultValue={cart !== null ? `${cart.typer}` : '0'} required/>
       </div>
       <div className={scss.name}>
         <label>Firmanavn *</label>
