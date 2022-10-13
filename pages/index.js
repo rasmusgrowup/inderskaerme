@@ -104,7 +104,7 @@ export default function Home({ maerker, modeller, __type }) {
     console.log(a + ' ' + b)
   }, [])
 
-  console.log(cart)
+  console.log(data)
 
   return (
     <>
@@ -175,7 +175,7 @@ export default function Home({ maerker, modeller, __type }) {
                   <button key={i} className={
                   `${scss.tag} ${scss.allTag} ${type === t.name ? `${scss.selected}` : ''}`} onClick={() => setType(t.name)}>
                     <span>
-                      { t.name == 'Alu_flad' ? 'Aluminium (flad)' :
+                      { t.name == 'Alu_flad' ? 'Alu. (flad)' :
                         t.name == 'Plast_flad' ? 'Plast (flad)' :
                         t.name == 'Plast_stoebt' ? 'Plast (støbt)' :
                         t.name == 'Anden' ? 'Anden' : t.name
@@ -208,6 +208,7 @@ export default function Home({ maerker, modeller, __type }) {
                     <div>Model</div>
                     <div>Årgang</div>
                     <div>For / bag</div>
+                    <div>Type</div>
                   </div>
                   <div className={scss.row} ref={rowRef}>
                     { modeller.filter((v) => {
@@ -239,6 +240,15 @@ export default function Home({ maerker, modeller, __type }) {
                             {model.forBag}
                           </div>
                         }
+                        { model.typer &&
+                            <div className={scss.type}>
+                              { model.typer == 'Alu_flad' ? 'Alu. (flad)' :
+                                  model.typer == 'Plast_flad' ? 'Plast (flad)' :
+                                      model.typer == 'Plast_stoebt' ? 'Plast (støbt)' :
+                                          model.typer == 'Anden' ? 'Anden' : model.typer
+                              }
+                            </div>
+                        }
                       </div>
                     ))}
                   </div>
@@ -260,11 +270,17 @@ export default function Home({ maerker, modeller, __type }) {
         { cart !== null
           ? <ul className={scss.ordreListe}>
             <li>{cart.maerke.navn} {cart.model}</li>
-            { cart.type && <li>Type: {cart.type}</li>}
             <li>Varenummer: {cart.varenummer.varenummer}</li>
             <li>Årgang: {cart.aar}</li>
-            { cart.kommentar && <li>{cart.kommentar}</li>} 
-          </ul>
+            <li>Type:
+              { cart.typer == 'Alu_flad' ? ' Alu. (flad)' :
+                  cart.typer == 'Plast_flad' ? ' Plast (flad)' :
+                      cart.typer == 'Plast_stoebt' ? ' Plast (støbt)' :
+                          cart.typer == 'Anden' ? ' Anden' : cart.typer
+              }
+            </li>
+            { cart.kommentar && <li>{cart.kommentar}</li>}
+            </ul>
           :
           <></>
         }

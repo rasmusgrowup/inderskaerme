@@ -15,15 +15,15 @@ export default function Bestil() {
           ? <ul className={scss.ordreListe}>
             <li>{cart.maerke.navn} {cart.model}</li>
             <li>Varenummer: {cart.varenummer.varenummer}</li>
+            <li>Årgang: {cart.aar}</li>
+            { cart.kommentar && <li>OBS: {cart.kommentar}</li> }
             <li>Type:
-              { cart.typer == 'Alu_flad' ? ' Aluminium (flad)' :
+              { cart.typer == 'Alu_flad' ? ' Alu. (flad)' :
                 cart.typer == 'Plast_flad' ? ' Plast (flad)' :
                 cart.typer == 'Plast_stoebt' ? ' Plast (støbt)' :
                 cart.typer == 'Anden' ? ' Anden' : cart.typer
               }
             </li>
-            <li>Årgang: {cart.aar}</li>
-            { cart.kommentar && <li>OBS: {cart.kommentar}</li> }
           </ul>
           :
           <></>

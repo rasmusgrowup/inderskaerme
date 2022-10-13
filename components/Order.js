@@ -32,21 +32,27 @@ const Order = () => {
         <input style={{ display: 'none' }} type="text" name="model" defaultValue={cart !== null ? `${cart.model}` : '0'} required/>
         <input style={{ display: 'none' }} type="text" name="sku" defaultValue={cart !== null ? `${cart.varenummer.varenummer}` : '0'} required/>
         <input style={{ display: 'none' }} type="text" name="aar" defaultValue={cart !== null ? `${cart.aar}` : '0'} required/>
+        <input style={{ display: 'none' }} type="text" name="aar" defaultValue={cart !== null ? `${cart.typer}` : '0'} required/>
       </div>
       <div className={scss.name}>
-        <label>Navn *</label>
+        <label>Firmanavn *</label>
         <input
         type="text"
         name="from_name"
-        placeholder="Anders"
         required/>
       </div>
+        <div className={scss.name}>
+            <label>Att./</label>
+            <input
+            type="text"
+            name="from_name"
+            />
+        </div>
       <div className={scss.email}>
         <label>Email *</label>
         <input
         type="email"
         name="from_email"
-        placeholder="email@mail.com"
         required/>
       </div>
       <div className={scss.phone}>
@@ -54,15 +60,15 @@ const Order = () => {
         <input
         type="phone"
         name="from_phone"
-        placeholder="+45 12 34 56 78"/>
+        />
       </div>
       <h3>Leveringsadresse</h3>
       <div className={scss.address}>
-        <label>Adresse *</label>
+        <label>Adresse</label>
         <input
         type="text"
         name="from_address"
-        required/>
+        />
       </div>
       <div className={scss.address}>
         <label>Evt. etage</label>
@@ -71,18 +77,18 @@ const Order = () => {
         name="from_floor"/>
       </div>
       <div className={scss.address}>
-        <label>By *</label>
+        <label>By</label>
         <input
         type="text"
         name="from_city"
-        required/>
+        />
       </div>
       <div className={scss.address}>
-        <label>Postnummer *</label>
+        <label>Postnummer</label>
         <input
         type="number"
         name="from_zip"
-        required/>
+        />
       </div>
       <div className={scss.secondAddressButton}>
         <p>Tilføj faktureringsadresse?</p>
@@ -93,39 +99,39 @@ const Order = () => {
       { secondAddress === true ?
         <><h3>Faktureringsadresse</h3>
         <div className={scss.address}>
-          <label>Adresse *</label>
+          <label>Adresse</label>
           <input
           type="text"
           name="from_address_billing"
-          required/>
+          />
         </div>
         <div className={scss.address}>
-          <label>By *</label>
+          <label>By</label>
           <input
           type="text"
           name="from_city_billing"
-          required/>
+          />
         </div>
         <div className={scss.address}>
-          <label>Postnummer *</label>
+          <label>Postnummer</label>
           <input
           type="number"
           name="from_zip_billing"
-          required/>
+          />
         </div>
         <div className={scss.address}>
-          <label>CVR *</label>
+          <label>CVR</label>
           <input
           type="text"
           name="from_cvr"
-          required/>
+          />
         </div></> : null
       }
       <div className={scss.comment}>
         <label>Bemærkning (rekv.nr. eller andet)</label>
         <textarea
         name="from_comment"
-        required/>
+        />
       </div>
       <button type="submit" defaultValue="Send" className={scss.submit}>
         Afgiv bestilling
