@@ -113,9 +113,9 @@ export default function Home({ maerker, modeller, __type }) {
         <h2>Fra Austin Healey til Aygo X</h2>
         <p>Hér på siden finder du de skærme du søger - og du bestiller med få klik. <br />
          Spørgsmål? Kontakt Claus på mob. 
-          <Link href='tel:+4529625995'><a style={{ color: 'blue' }} > 29 62 59 95 </a></Link>
+          <Link href='tel:+4529625995'><a style={{ color: 'var(--red)' }} > 29 62 59 95 </a></Link>
           eller mail
-          <Link href='mailto:inderskaerme@tektrol.dk'><a style={{ color: 'blue' }}> inderskaerme@tektrol.dk</a></Link>
+          <Link href='mailto:inderskaerme@tektrol.dk'><a style={{ color: 'var(--red)' }}> inderskaerme@tektrol.dk</a></Link>
         </p>
         <p style={{ opacity: '0.5' }}>
           Kun salg til CVR-nr.<br />
