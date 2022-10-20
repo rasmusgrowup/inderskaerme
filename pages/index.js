@@ -43,6 +43,7 @@ const GetAll = gql`
         maerke {
           navn
         }
+        pris
       }
     }
     modeller(orderBy: model_ASC) {
@@ -280,6 +281,7 @@ export default function Home({ maerker, modeller, __type }) {
               }
             </li>
             { cart.kommentar && <li>{cart.kommentar}</li>}
+            { cart.pris && <li>DKK {cart.pris} ex. moms.</li>}
             </ul>
           :
           <></>

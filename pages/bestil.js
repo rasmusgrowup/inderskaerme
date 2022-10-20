@@ -16,13 +16,17 @@ export default function Bestil() {
             <li>{cart.maerke.navn} {cart.model}</li>
             <li>Varenummer: {cart.varenummer.varenummer}</li>
             <li>Årgang: {cart.aar}</li>
-            { cart.kommentar && <li>OBS: {cart.kommentar}</li> }
+            { cart.kommentar && <span>OBS: {cart.kommentar}</span> }
             <li>Type:
               { cart.typer == 'Alu_flad' ? ' Alu. (flad)' :
                 cart.typer == 'Plast_flad' ? ' Plast (flad)' :
                 cart.typer == 'Plast_stoebt' ? ' Plast (støbt)' :
                 cart.typer == 'Anden' ? ' Anden' : cart.typer
               }
+            </li>
+            <li className={scss.price}>
+                <span>DKK 60 i fragt</span>
+                { cart.pris && <span>DKK {cart.pris} ex. moms pr. sæt</span>}
             </li>
           </ul>
           :
