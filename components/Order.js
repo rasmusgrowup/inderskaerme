@@ -72,12 +72,6 @@ const Order = () => {
         />
       </div>
       <div className={scss.address}>
-        <label>Evt. etage</label>
-        <input
-        type="text"
-        name="from_floor"/>
-      </div>
-      <div className={scss.address}>
         <label>Postnummer</label>
         <input
         type="number"
@@ -107,6 +101,13 @@ const Order = () => {
           />
         </div>
         <div className={scss.address}>
+            <label>Postnummer</label>
+            <input
+                type="number"
+                name="from_zip_billing"
+            />
+        </div>
+        <div className={scss.address}>
           <label>By</label>
           <input
           type="text"
@@ -114,11 +115,11 @@ const Order = () => {
           />
         </div>
         <div className={scss.address}>
-          <label>Postnummer</label>
-          <input
-          type="number"
-          name="from_zip_billing"
-          />
+            <label>Faktura-email</label>
+            <input
+                type="text"
+                name="second_email"
+            />
         </div>
         <div className={scss.address}>
           <label>CVR</label>
