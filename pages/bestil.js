@@ -17,6 +17,7 @@ export default function Bestil() {
             <li>Varenummer: {cart.varenummer.varenummer}</li>
             <li>Årgang: {cart.aar}</li>
             { cart.kommentar && <span>OBS: {cart.kommentar}</span> }
+            <li>For/bag: {cart.forBag}</li>
             <li>Type:
               { cart.typer == 'Alu_flad' ? ' Alu. (flad)' :
                 cart.typer == 'Plast_flad' ? ' Plast (flad)' :

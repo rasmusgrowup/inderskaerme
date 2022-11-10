@@ -38,7 +38,6 @@ const GetAll = gql`
           id
           lager
           varenummer
-          pris
         }
         maerke {
           navn
@@ -273,6 +272,7 @@ export default function Home({ maerker, modeller, __type }) {
             <li>{cart.maerke.navn} {cart.model}</li>
             <li>Varenummer: {cart.varenummer.varenummer}</li>
             <li>Årgang: {cart.aar}</li>
+            <li>For/bag: {cart.forBag}</li>
             <li>Type:
               { cart.typer == 'Alu_flad' ? ' Alu. (flad)' :
                   cart.typer == 'Plast_flad' ? ' Plast (flad)' :

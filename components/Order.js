@@ -16,7 +16,7 @@ const Order = () => {
     e.preventDefault();
     emailjs.sendForm('service_sanazj2', 'template_2hol8s8', form.current, 'tH-J6gUM-hxjwlPEX')
       .then((result) => {
-          alert('Tak for din ordre. Vi sender en bekræftelse på den angivede mail-adresse');
+          alert('Tak for din ordre. Vi sender en bekræftelse på den angivne mail-adresse');
       }, (error) => {
           alert('Der skete desværre en fejl');
       });
@@ -29,10 +29,11 @@ const Order = () => {
   return (
     <form ref={form} onSubmit={sendEmail} className={scss.form}>
       <div className={scss.order} style={{ display: 'none' }}>
-        <input type="text" name="model" defaultValue={cart !== null ? `${cart.model}` : '0'} required/>
+        <input type="text" name="model" defaultValue={cart !== null ? `${cart.maerke.navn} ${cart.model}` : '0'} required/>
         <input type="text" name="sku" defaultValue={cart !== null ? `${cart.varenummer.varenummer}` : '0'} required/>
         <input type="text" name="aar" defaultValue={cart !== null ? `${cart.aar}` : '0'} required/>
         <input type="text" name="type" defaultValue={cart !== null ? `${cart.typer}` : '0'} required/>
+        <input type="text" name="forBag" defaultValue={cart !== null ? `${cart.forBag}` : '0'} required/>
       </div>
       <div className={scss.name}>
         <label>Firmanavn *</label>
@@ -77,19 +78,19 @@ const Order = () => {
         name="from_floor"/>
       </div>
       <div className={scss.address}>
-        <label>By</label>
-        <input
-        type="text"
-        name="from_city"
-        />
-      </div>
-      <div className={scss.address}>
         <label>Postnummer</label>
         <input
         type="number"
         name="from_zip"
         />
       </div>
+        <div className={scss.address}>
+            <label>By</label>
+            <input
+                type="text"
+                name="from_city"
+            />
+        </div>
       <div className={scss.secondAddressButton}>
         <p>Tilføj faktureringsadresse?</p>
         <div className={scss.addSecondAddress} onClick={handleSecondAddress}>
