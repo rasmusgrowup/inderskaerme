@@ -14,7 +14,7 @@ const Order = () => {
 
   const sendEmail = (e) => {
     e.preventDefault();
-    emailjs.sendForm('service_7vw8eei', 'template_hkxtror', form.current, 'PUe4D3oMuqh_zqG27')
+    emailjs.sendForm('service_sanazj2', 'template_2hol8s8', form.current, 'tH-J6gUM-hxjwlPEX')
       .then((result) => {
           alert('Tak for din ordre. Vi sender en bekræftelse på den angivede mail-adresse');
       }, (error) => {
