@@ -12,14 +12,23 @@ import { gql } from 'graphql-request';
 import { CartContext } from '../lib/CartContext';
 
 // Components
-import CheckMark from '../components/Icons/CheckMark'
-import ArrowRight from '../components/Icons/ArrowRight'
-import MailIcon from '../components/Icons/MailIcon'
-import PhoneIcon from '../components/Icons/PhoneIcon'
-import CloseIcon from '../components/Icons/CloseIcon'
 import SearchIcon from '../components/Icons/SearchIcon'
 import FilterIcon from '../components/Icons/FilterIcon'
-import Order from '../components/Order'
+
+const GetSide = gql`
+  query getSide {
+    side(where: {type: Forside}) {
+      titel
+      undertitel
+      primaerTekst {
+        html
+      }
+      sekundaerTekst {
+        html
+      }
+    }
+  }
+`
 
 const GetAll = gql`
   query GetMaerker {
@@ -58,17 +67,19 @@ const GetAll = gql`
 
 export async function getServerSideProps(context) {
   const { maerker, modeller, __type } = await graphcmsClient.request(GetAll)
+  const { side } = await graphcmsClient.request(GetSide)
 
   return {
     props: {
       maerker,
       modeller,
       __type,
+      side,
     }
   }
 }
 
-export default function Home({ maerker, modeller, __type }) {
+export default function Home({ maerker, modeller, __type, side }) {
   const [loaded, setLoaded] = useState(false);
   const [data, setData] = useState(maerker);
   const [filtered, setFiltered] = useState(data);
@@ -109,20 +120,10 @@ export default function Home({ maerker, modeller, __type }) {
   return (
     <>
       <section className={scss.heading}>
-        <h1>Inderskærme</h1>
-        <h2>Fra Austin Healey til Aygo X</h2>
-        <p>Hér på siden finder du de skærme du søger - og du bestiller med få klik. <br />
-         Spørgsmål? Kontakt Claus på mob. 
-          <Link href='tel:+4529625995'><a style={{ color: 'var(--red)' }} > 29 62 59 95 </a></Link>
-          eller mail
-          <Link href='mailto:inderskaerme@tektrol.dk'><a style={{ color: 'var(--red)' }}> inderskaerme@tektrol.dk</a></Link>
-        </p>
-        <p style={{ opacity: '0.5' }}>
-          Kun salg til CVR-nr.<br />
-          Ved bestilling før kl. 11:30 sender vi samme dag<br />
-          Priser: Flade alu./plast: DKK 750,- pr. sæt. Formstøbte Lokari-skærme: DKK 850 pr. sæt<br />
-          Pris er ekskl. fragt og moms. DK-fragt: 60 DKK<br />
-        </p>
+        <h1>{side.titel}</h1>
+        <h2>{side.undertitel}</h2>
+        <div dangerouslySetInnerHTML={{ __html: `${side.primaerTekst.html}` }}></div>
+        <div style={{ opacity: '0.5' }} dangerouslySetInnerHTML={{ __html: `${side.sekundaerTekst.html}` }}></div>
       </section>
       <section className={scss.shop}>
         <div className={scss.filter}>

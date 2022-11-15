@@ -17,6 +17,14 @@
   text-align: center;
 }
 
+.heading a {
+  color: var(--red);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .message {
   background-color: var(--light);
   border: 1px solid var(--line);
