@@ -1,17 +1,25 @@
 import Order from '../components/Order'
 import scss from '../styles/main.module.scss'
-import { useState, useEffect, useRef, useContext } from 'react'
+import { useEffect, useContext } from 'react'
+import { useRouter } from "next/router";
 
 // context
 import { CartContext } from '../lib/CartContext';
 
 export default function Ordre() {
     const [cart, setCart] = useContext(CartContext);
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!cart) {
+            router.push("/");
+        }
+    }, [])
 
     return (
         <section className={scss.bestilling}>
             <h1>Ordrebekræftelse</h1>
-            { cart.map((cart, i) => (
+            { cart?.map((cart, i) => (
                 <ul key={i} className={scss.ordreListe}>
                     <li>{cart.maerke.navn} {cart.model}</li>
                     <li>Varenummer: {cart.varenummer.varenummer}</li>

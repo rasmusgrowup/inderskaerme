@@ -270,7 +270,7 @@ export default function Home({ maerker, modeller, __type, side }) {
         `}>
           <p>Du er ved at bestille:</p>
           <div className={scss.orderInner}>
-            { models.map((model, i) => (
+            { models?.map((model, i) => (
                 <ul key={i} className={scss.ordreListe}>
                   <li>{model.maerke.navn} {model.model}</li>
                   <li>Varenummer: {model.varenummer.varenummer}</li>

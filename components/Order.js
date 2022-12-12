@@ -17,19 +17,22 @@ const Order = () => {
     const env = process.env.NODE_ENV;
 
     useEffect(() => {
-        let body = "";
-        let i = 0;
-        for (i; i < cart.length; i++) {
-            body += "Model: " + cart[i].maerke.navn;
-            body += " " + cart[i].model + "\n";
-            body += "Varenummer:" + cart[i].varenummer.varenummer + "\n";
-            body += "Årgang" + cart[i].aar + "\n";
-            body += "Type:" + cart[i].typer + "\n";
-            body += "For/Bag" + cart[i].forBag + "\n";
-            body += "\n"
+        if (cart) {
+            let body = "";
+            let i = 0;
+            for (i; i < cart.length; i++) {
+                body += "Model: " + cart[i].maerke.navn;
+                body += " " + cart[i].model + "\n";
+                body += "Varenummer:" + cart[i].varenummer.varenummer + "\n";
+                body += "Årgang" + cart[i].aar + "\n";
+                body += "Type:" + cart[i].typer + "\n";
+                body += "For/Bag" + cart[i].forBag + "\n";
+                body += "\n"
+            }
+            setBodyText(body)
+        } else {
+            router.push("/")
         }
-        setBodyText(body)
-        console.log(bodyText)
     }, [])
 
     const sendEmail = (e) => {
