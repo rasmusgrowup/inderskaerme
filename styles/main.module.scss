@@ -420,18 +420,24 @@
     font-weight: bold;
     opacity: 1;
   }
+}
 
-  .price {
-    border-top: 1px dashed var(--main);
-    margin-top: 1em;
-    padding-top: 1em;
+.orderInner {
+  max-height: 320px;
+  margin-bottom: 1em;
+  overflow-y: scroll;
+}
 
-    span {
-      display: block;
+.price {
+  border-top: 1px dashed var(--main);
+  margin-top: 1em;
+  padding-top: 1em;
 
-      &:last-of-type {
-        font-weight: bold;
-      }
+  span {
+    display: block;
+
+    &:last-of-type {
+      font-weight: bold;
     }
   }
 }

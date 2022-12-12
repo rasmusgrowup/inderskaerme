@@ -83,12 +83,13 @@ export default function Home({ maerker, modeller, __type, side }) {
   const [loaded, setLoaded] = useState(false);
   const [data, setData] = useState(maerker);
   const [filtered, setFiltered] = useState(data);
-  const [models, setModels] = useState(modeller);
+  //const [models, setModels] = useState(modeller);
+  const [models, setModels] = useState([]);
   const [searchTerm, setSearchTerm] =useState("");
   const [showOrder, setShowOrder] = useState(false);
   const [cart, setCart] = useContext(CartContext);
   const [dropdown, setDropdown] = useState(false);
-  const [isTypesNull, setIsTypesNull] = useState(false);
+  //const [isTypesNull, setIsTypesNull] = useState(false);
   const [type, setType] = useState("");
   const router = useRouter();
   const listRef = useRef(null);
@@ -99,7 +100,7 @@ export default function Home({ maerker, modeller, __type, side }) {
   }
 
   const addToCart = (event, model) => {
-    setCart(model)
+    setModels([...models, model])
     setShowOrder(true)
   }
 
@@ -109,13 +110,13 @@ export default function Home({ maerker, modeller, __type, side }) {
 
   useEffect(() => {
     setLoaded(true)
-    const a = 'Alfa Romeo'
-    const b = '145'
-    const c = a.concat(' ', b)
-    console.log(a + ' ' + b)
   }, [])
 
-  console.log(data)
+  useEffect(() => {
+    setCart(models)
+  }, [models])
+
+  console.log(cart)
 
   return (
     <>
@@ -176,10 +177,10 @@ export default function Home({ maerker, modeller, __type, side }) {
                   <button key={i} className={
                   `${scss.tag} ${scss.allTag} ${type === t.name ? `${scss.selected}` : ''}`} onClick={() => setType(t.name)}>
                     <span>
-                      { t.name == 'Alu_flad' ? 'Alu. (flad)' :
-                        t.name == 'Plast_flad' ? 'Plast (flad)' :
-                        t.name == 'Plast_stoebt' ? 'Plast (støbt)' :
-                        t.name == 'Anden' ? 'Anden' : t.name
+                      { t.name === 'Alu_flad' ? 'Alu. (flad)' :
+                        t.name === 'Plast_flad' ? 'Plast (flad)' :
+                        t.name === 'Plast_stoebt' ? 'Plast (støbt)' :
+                        t.name === 'Anden' ? 'Anden' : t.name
                       }
                     </span>
                   </button>
@@ -193,10 +194,10 @@ export default function Home({ maerker, modeller, __type, side }) {
           { loaded
             ? <div className={scss.listInner}>
               { filtered.filter((val) => {
-                if (searchTerm == "" && type == "") {
+                if (searchTerm === "" && type === "") {
                   return val
                 } else if (
-                  val.modeller.some(y => (y.typer.toLowerCase() === type.toLowerCase() || type == "") && (y.maerke.navn.toLowerCase() + ' ' + y.model.toLowerCase()).includes(searchTerm.toLowerCase()))
+                  val.modeller.some(y => (y.typer.toLowerCase() === type.toLowerCase() || type === "") && (y.maerke.navn.toLowerCase() + ' ' + y.model.toLowerCase()).includes(searchTerm.toLowerCase()))
                 ) {
                   return val
                 }
@@ -213,10 +214,10 @@ export default function Home({ maerker, modeller, __type, side }) {
                   </div>
                   <div className={scss.row} ref={rowRef}>
                     { modeller.filter((v) => {
-                      if (searchTerm == "" && type == "") {
+                      if (searchTerm === "" && type === "") {
                         return v
                       } else if (
-                        (v.typer.toLowerCase() === type.toLowerCase() || type == "") && (v.maerke.navn.toLowerCase() + ' ' + v.model.toLowerCase()).includes(searchTerm.toLowerCase())
+                        (v.typer.toLowerCase() === type.toLowerCase() || type === "") && (v.maerke.navn.toLowerCase() + ' ' + v.model.toLowerCase()).includes(searchTerm.toLowerCase())
                       ) {
                         return v
                       }
@@ -243,10 +244,10 @@ export default function Home({ maerker, modeller, __type, side }) {
                         }
                         { model.typer &&
                             <div className={scss.type}>
-                              { model.typer == 'Alu_flad' ? 'Alu. (flad)' :
-                                  model.typer == 'Plast_flad' ? 'Plast (flad)' :
-                                      model.typer == 'Plast_stoebt' ? 'Plast (støbt)' :
-                                          model.typer == 'Anden' ? 'Anden' : model.typer
+                              { model.typer === 'Alu_flad' ? 'Alu. (flad)' :
+                                  model.typer === 'Plast_flad' ? 'Plast (flad)' :
+                                      model.typer === 'Plast_stoebt' ? 'Plast (støbt)' :
+                                          model.typer === 'Anden' ? 'Anden' : model.typer
                               }
                             </div>
                         }
@@ -259,43 +260,48 @@ export default function Home({ maerker, modeller, __type, side }) {
             : <><div>Indlæser modeller</div></>
           }
         </section>
-      </section>
-      <div className={`
+
+        <div className={`
         ${scss.order}
         ${ showOrder === true
-          ? `${scss.showOrder}`
-          : `${scss.hideOrder}
+            ? `${scss.showOrder}`
+            : `${scss.hideOrder}
           `}
         `}>
-        <p>Du er ved at bestille:</p>
-        { cart !== null
-          ? <ul className={scss.ordreListe}>
-            <li>{cart.maerke.navn} {cart.model}</li>
-            <li>Varenummer: {cart.varenummer.varenummer}</li>
-            <li>Årgang: {cart.aar}</li>
-            <li>For/bag: {cart.forBag}</li>
-            <li>Type:
-              { cart.typer == 'Alu_flad' ? ' Alu. (flad)' :
-                  cart.typer == 'Plast_flad' ? ' Plast (flad)' :
-                      cart.typer == 'Plast_stoebt' ? ' Plast (støbt)' :
-                          cart.typer == 'Anden' ? ' Anden' : cart.typer
-              }
-            </li>
-            { cart.kommentar && <li>{cart.kommentar}</li>}
-            { cart.pris && <li>DKK {cart.pris} ex. moms.</li>}
-            </ul>
-          :
-          <></>
-        }
-        <button className={scss.videre} onClick={tilBestilling}>
-          Gå til bestillingssiden
-        </button>
-        <button
-        className={scss.anuller}
-        onClick={() => setShowOrder(false)}>
-          Anullér
-        </button>
-      </div>
+          <p>Du er ved at bestille:</p>
+          <div className={scss.orderInner}>
+            { models.map((model, i) => (
+                <ul key={i} className={scss.ordreListe}>
+                  <li>{model.maerke.navn} {model.model}</li>
+                  <li>Varenummer: {model.varenummer.varenummer}</li>
+                  {models.length <= 1 &&
+                      <>
+                        <li>Årgang: {model.aar}</li>
+                        <li>For/bag: {model.forBag}</li>
+                        <li>Type:
+                          {model.typer === 'Alu_flad' ? ' Alu. (flad)' :
+                              model.typer === 'Plast_flad' ? ' Plast (flad)' :
+                                  model.typer === 'Plast_stoebt' ? ' Plast (støbt)' :
+                                      model.typer === 'Anden' ? ' Anden' : model.typer
+                          }
+                        </li>
+                        {model.kommentar && <li>{model.kommentar}</li>}
+                        {model.pris && <li>DKK {model.pris} ex. moms.</li>}
+                      </>
+                  }
+                </ul>
+            ))}
+          </div>
+          <button className={scss.videre} onClick={tilBestilling}>
+            Gå til bestillingssiden
+          </button>
+          <button
+              className={scss.anuller}
+              onClick={() => setShowOrder(false)}>
+            Anullér
+          </button>
+        </div>
+      </section>
     </>
   )
 }

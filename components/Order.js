@@ -2,38 +2,64 @@ import scss from '../styles/form.module.scss'
 
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
+import { useRouter } from "next/router";
 
 // context
 import { CartContext } from '../lib/CartContext';
 
 const Order = () => {
-  const form = useRef();
-  const [cart, setCart] = useContext(CartContext);
-  const [secondAddress, setSecondAddress] = useState(false)
+    const form = useRef();
+    const [cart, setCart] = useContext(CartContext);
+    const [secondAddress, setSecondAddress] = useState(false);
+    const [bodyText, setBodyText] = useState();
+    const router = useRouter();
+    const env = process.env.NODE_ENV;
 
-  const sendEmail = (e) => {
-    e.preventDefault();
-    emailjs.sendForm('service_sanazj2', 'template_2hol8s8', form.current, 'tH-J6gUM-hxjwlPEX')
-      .then((result) => {
-          alert('Tak for din ordre. Vi sender en bekræftelse på den angivne mail-adresse');
-      }, (error) => {
-          alert('Der skete desværre en fejl');
-      });
-  };
+    useEffect(() => {
+        let body = "";
+        let i = 0;
+        for (i; i < cart.length; i++) {
+            body += "Model: " + cart[i].maerke.navn;
+            body += " " + cart[i].model + "\n";
+            body += "Varenummer:" + cart[i].varenummer.varenummer + "\n";
+            body += "Årgang" + cart[i].aar + "\n";
+            body += "Type:" + cart[i].typer + "\n";
+            body += "For/Bag" + cart[i].forBag + "\n";
+            body += "\n"
+        }
+        setBodyText(body)
+        console.log(bodyText)
+    }, [])
 
-  const handleSecondAddress = () => {
-    setSecondAddress(!secondAddress)
-  }
+    const sendEmail = (e) => {
+        e.preventDefault();
 
-  return (
+        if (env === "development") {
+            emailjs.sendForm('service_7vw8eei', 'template_hkxtror', form.current, 'PUe4D3oMuqh_zqG27')
+            .then((result) => {
+                router.push("/ordre");
+            }, (error) => {
+                alert('Der skete desværre en fejl');
+            });
+        } else if (env === "production"){
+            emailjs.sendForm('service_sanazj2', 'template_2hol8s8', form.current, 'tH-J6gUM-hxjwlPEX')
+            .then((result) => {
+                router.push("/ordre");
+            }, (error) => {
+                alert('Der skete desværre en fejl');
+            });
+        }
+    };
+
+    const handleSecondAddress = () => {
+        setSecondAddress(!secondAddress)
+    }
+
+    return (
     <form ref={form} onSubmit={sendEmail} className={scss.form}>
       <div className={scss.order} style={{ display: 'none' }}>
-        <input type="text" name="model" defaultValue={cart !== null ? `${cart.maerke.navn} ${cart.model}` : '0'} required/>
-        <input type="text" name="sku" defaultValue={cart !== null ? `${cart.varenummer.varenummer}` : '0'} required/>
-        <input type="text" name="aar" defaultValue={cart !== null ? `${cart.aar}` : '0'} required/>
-        <input type="text" name="type" defaultValue={cart !== null ? `${cart.typer}` : '0'} required/>
-        <input type="text" name="forBag" defaultValue={cart !== null ? `${cart.forBag}` : '0'} required/>
+          <textarea name="body" defaultValue={bodyText} required/>
       </div>
       <div className={scss.name}>
         <label>Firmanavn *</label>
