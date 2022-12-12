@@ -298,7 +298,7 @@ export default function Home({ maerker, modeller, __type, side }) {
           <button
               className={scss.anuller}
               onClick={() => setShowOrder(false)}>
-            Anullér
+            Annulér
           </button>
         </div>
       </section>
