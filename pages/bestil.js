@@ -33,7 +33,7 @@ export default function Bestil() {
   return (
     <>
       <section className={scss.bestilling}>
-        <h1>Du er ved at bestille følgende:</h1>
+        <h1>Din kurv:</h1>
         { cart !== null && cart.map((c, i) => (
             <ul key={i} className={scss.ordreListe}>
                 <li>{c.maerke.navn} {c.model}</li>
