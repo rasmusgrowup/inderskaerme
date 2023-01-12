@@ -410,6 +410,7 @@
   list-style: none;
   font-size: 18px;
   padding: 1rem;
+  position: relative;
   z-index: 1;
 
   li {
@@ -429,9 +430,9 @@
 }
 
 .price {
-  border-top: 1px dashed var(--main);
+  border-bottom: 1px dashed var(--main);
   margin-top: 1em;
-  padding-top: 1em;
+  padding-bottom: 1em;
 
   span {
     display: block;
@@ -439,6 +440,22 @@
     &:last-of-type {
       font-weight: bold;
     }
+  }
+}
+
+.removeBtn {
+  background-color: var(--light);
+  border: none;
+  border-radius: 5px;
+  color: var(--red);
+  cursor: pointer;
+  padding: 0.5rem;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+
+  &:hover {
+    background-color: var(--line)
   }
 }
 

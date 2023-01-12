@@ -102,6 +102,7 @@ export default function Home({ maerker, modeller, __type, side }) {
   const addToCart = (event, model) => {
     setModels([...models, model])
     setShowOrder(true)
+    console.log(event)
   }
 
   const handleDropdown = () => {
@@ -115,8 +116,6 @@ export default function Home({ maerker, modeller, __type, side }) {
   useEffect(() => {
     setCart(models)
   }, [models])
-
-  console.log(cart)
 
   return (
     <>
@@ -153,7 +152,7 @@ export default function Home({ maerker, modeller, __type, side }) {
                   </span>
                 </button>
                 { data.map((tag) => (
-                  <button key={tag.id} type='button' className={`${scss.tag} ${tag === filtered[0] && filtered != data ? `${scss.selected}` : ''}`} onClick={() => setFiltered([tag])}>
+                  <button key={tag.id} type='button' className={`${scss.tag} ${tag === filtered[0] && filtered !== data ? `${scss.selected}` : ''}`} onClick={() => setFiltered([tag])}>
                     <span>
                       {tag.navn}
                     </span>
@@ -201,7 +200,7 @@ export default function Home({ maerker, modeller, __type, side }) {
                 ) {
                   return val
                 }
-              }).map(({navn, id, modeller, maerke}) => (
+              }).map(({navn, id, modeller}) => (
                 <div className={scss.models} key={id} ref={listRef}>
                   <h2>
                     {navn}

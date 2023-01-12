@@ -4,10 +4,20 @@ import { useState, useEffect, useRef, useContext } from 'react'
 
 // context
 import { CartContext } from '../lib/CartContext';
+import {useRouter} from "next/router";
 
 export default function Bestil() {
-    const [cart, setCart] = useContext(CartContext);
+    const [cart, setCart] = useContext(CartContext)
     const [price, setPrice] = useState()
+    const router = useRouter()
+
+    const removeFromCart = (c) => {
+        const newCartData = cart.filter((item) => item !== c)
+        setCart(newCartData)
+        if (cart.length === 1) {
+            router.push("/")
+        }
+    }
 
     useEffect(() => {
         if (cart != null) {
@@ -17,10 +27,9 @@ export default function Bestil() {
                 price += cart[i].pris;
             }
             setPrice(price);
-        } else {
-            setPrice(0);
         }
-    }, [])
+    }, [cart])
+
   return (
     <>
       <section className={scss.bestilling}>
@@ -39,6 +48,7 @@ export default function Bestil() {
                                 c.typer == 'Anden' ? ' Anden' : c.typer
                     }
                 </li>
+                <button className={scss.removeBtn} onClick={() => removeFromCart(c)}>Fjern</button>
             </ul>
         ))}
           <div className={scss.price}>
@@ -46,7 +56,7 @@ export default function Bestil() {
               <span>DKK {price} ex. moms pr. sæt</span>
           </div>
         <h2>Kontakt- og leveringsoplysninger</h2>
-          <Order />
+          <Order cartData={cart}/>
       </section>
     </>
   )

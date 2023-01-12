@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 // context
 import { CartContext } from '../lib/CartContext';
 
-const Order = () => {
+function Order(cartData) {
     const form = useRef();
     const [cart, setCart] = useContext(CartContext);
     const [secondAddress, setSecondAddress] = useState(false);
@@ -33,7 +33,9 @@ const Order = () => {
         } else {
             router.push("/")
         }
-    }, [])
+    }, [cart])
+
+    console.log("To order: " + cart)
 
     const sendEmail = (e) => {
         e.preventDefault();
