@@ -17,7 +17,9 @@ export default function Header() {
           <Link href='https://tektrol.dk'><a target='_blank' style={{ display: 'flex' }}><Image src={Logo} /></a></Link>
         </div>
         <nav className={scss.nav}>
-            <span className={ router.pathname === '/' ? `${scss.active}` : ''} onClick={() => router.push("/")}>Inderskærme</span>
+            <Link href={"/"}>
+                <a className={ router.pathname === '/' ? `${scss.active}` : ''}>Produkter</a>
+            </Link>
         </nav>
       </header>
     </>
