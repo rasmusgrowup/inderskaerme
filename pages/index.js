@@ -14,6 +14,7 @@ import { CartContext } from '../lib/CartContext';
 // Components
 import SearchIcon from '../components/Icons/SearchIcon'
 import FilterIcon from '../components/Icons/FilterIcon'
+import ShoppingCart from '../components/Icons/ShoppingCart'
 
 const GetSide = gql`
   query getSide {
@@ -63,7 +64,7 @@ const GetAll = gql`
       }
     }
   }
-`;
+`
 
 export async function getServerSideProps(context) {
   const { maerker, modeller, __type } = await graphcmsClient.request(GetAll)
@@ -98,7 +99,7 @@ export default function Home({ maerker, modeller, __type, side }) {
   }
 
   const addToCart = (event, model) => {
-    setModels([...models, model])
+    setCart([...cart, model])
     setShowOrder(true)
   }
 
@@ -111,11 +112,8 @@ export default function Home({ maerker, modeller, __type, side }) {
   }, [])
 
   useEffect(() => {
-    setCart(models)
-    localStorage.setItem("cart", JSON.stringify(models))
-  }, [models])
-
-  console.log(cart)
+    window.localStorage.setItem("cart", JSON.stringify(cart))
+  }, [cart])
 
   return (
     <>
@@ -269,7 +267,7 @@ export default function Home({ maerker, modeller, __type, side }) {
         `}>
           <p>Du er ved at bestille:</p>
           <div className={scss.orderInner}>
-            { models?.map((model, i) => (
+            { cart?.map((model, i) => (
                 <ul key={i} className={scss.ordreListe}>
                   <li>{model.maerke.navn} {model.model}</li>
                   <li>Varenummer: {model.varenummer.varenummer}</li>
@@ -300,6 +298,11 @@ export default function Home({ maerker, modeller, __type, side }) {
             Annullér
           </button>
         </div>
+        { !showOrder && cart &&
+            <div className={scss.cartButton} onClick={() => setShowOrder(true)}>
+              <ShoppingCart />
+            </div>
+        }
       </section>
     </>
   )

@@ -390,6 +390,12 @@
   z-index: 99;
   width: 100%;
 
+  p {
+    border-bottom: 1px solid var(--line);
+    margin: 0;
+    padding-bottom: 1rem;
+  }
+
   @media (max-width: $m) {
     bottom: 0;
     border-radius: 0;
@@ -401,6 +407,28 @@
 .showOrder {
   transform: translateY(0%);
   transition: 0.4s;
+}
+
+.cartButton {
+  align-items: center;
+  background-color: var(--white);
+  bottom: 2rem;
+  border-radius: 2rem;
+  -webkit-box-shadow: 0px 0px 200px 0px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px 0px 200px 0px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 0px 200px 0px rgba(0, 0, 0, 0.4);
+  color: var(--red);
+  display: flex;
+  height: 4rem;
+  justify-content: center;
+  position: fixed;
+  right: 2rem;
+  width: 4rem;
+
+  svg {
+    max-height: 1.5rem;
+    max-width: 1.5rem;
+  }
 }
 
 .ordreListe {

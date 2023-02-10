@@ -20,10 +20,6 @@ export default function Bestil() {
         }
     }
 
-    const tilForsiden = () => {
-        router.push('/', undefined, { shallow: true })
-    }
-
     useEffect(() => {
         if (cart != null) {
             let price = 0;
@@ -38,9 +34,8 @@ export default function Bestil() {
   return (
     <>
       <section className={scss.bestilling}>
-          <Link href='/' shallow>tilbage</Link>
         <h1>Din kurv:</h1>
-        { cart !== null && cart.map((c, i) => (
+        { cart && cart.map((c, i) => (
             <ul key={i} className={scss.ordreListe}>
                 <li>{c.maerke.navn} {c.model}</li>
                 <li>Varenummer: {c.varenummer.varenummer}</li>
@@ -58,7 +53,10 @@ export default function Bestil() {
             </ul>
         ))}
           <div className={scss.price}>
-              <span>I din kurv er {cart.length} sæt til i alt DKK {price} ekskl. moms.</span>
+              { cart
+                  ? <span>I din kurv er {cart.length} sæt til i alt DKK {price} ekskl. moms.</span>
+                  : <span>Ingen varer i kurven</span>
+              }
               <span>Fragt koster DKK 60,- i Danmark.</span>
           </div>
         <h2>Kontakt- og leveringsoplysninger</h2>
