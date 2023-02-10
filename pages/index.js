@@ -83,13 +83,11 @@ export default function Home({ maerker, modeller, __type, side }) {
   const [loaded, setLoaded] = useState(false);
   const [data, setData] = useState(maerker);
   const [filtered, setFiltered] = useState(data);
-  //const [models, setModels] = useState(modeller);
   const [models, setModels] = useState([]);
   const [searchTerm, setSearchTerm] =useState("");
   const [showOrder, setShowOrder] = useState(false);
   const [cart, setCart] = useContext(CartContext);
   const [dropdown, setDropdown] = useState(false);
-  //const [isTypesNull, setIsTypesNull] = useState(false);
   const [type, setType] = useState("");
   const router = useRouter();
   const listRef = useRef(null);
@@ -102,7 +100,6 @@ export default function Home({ maerker, modeller, __type, side }) {
   const addToCart = (event, model) => {
     setModels([...models, model])
     setShowOrder(true)
-    console.log(event)
   }
 
   const handleDropdown = () => {
@@ -115,7 +112,10 @@ export default function Home({ maerker, modeller, __type, side }) {
 
   useEffect(() => {
     setCart(models)
+    localStorage.setItem("cart", JSON.stringify(models))
   }, [models])
+
+  console.log(cart)
 
   return (
     <>
@@ -297,7 +297,7 @@ export default function Home({ maerker, modeller, __type, side }) {
           <button
               className={scss.anuller}
               onClick={() => setShowOrder(false)}>
-            Annulér
+            Annullér
           </button>
         </div>
       </section>

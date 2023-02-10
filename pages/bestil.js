@@ -5,6 +5,7 @@ import { useState, useEffect, useRef, useContext } from 'react'
 // context
 import { CartContext } from '../lib/CartContext';
 import {useRouter} from "next/router";
+import Link from "next/link";
 
 export default function Bestil() {
     const [cart, setCart] = useContext(CartContext)
@@ -17,6 +18,10 @@ export default function Bestil() {
         if (cart.length === 1) {
             router.push("/")
         }
+    }
+
+    const tilForsiden = () => {
+        router.push('/', undefined, { shallow: true })
     }
 
     useEffect(() => {
@@ -33,6 +38,7 @@ export default function Bestil() {
   return (
     <>
       <section className={scss.bestilling}>
+          <Link href='/' shallow>tilbage</Link>
         <h1>Din kurv:</h1>
         { cart !== null && cart.map((c, i) => (
             <ul key={i} className={scss.ordreListe}>
@@ -52,8 +58,8 @@ export default function Bestil() {
             </ul>
         ))}
           <div className={scss.price}>
-              <span>DKK {cart != null ? 60 : 0} i fragt</span>
-              <span>DKK {price} ex. moms pr. sæt</span>
+              <span>I din kurv er {cart.length} sæt til i alt DKK {price} ekskl. moms.</span>
+              <span>Fragt koster DKK 60,- i Danmark.</span>
           </div>
         <h2>Kontakt- og leveringsoplysninger</h2>
           <Order cartData={cart}/>

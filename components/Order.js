@@ -35,7 +35,7 @@ function Order(cartData) {
         }
     }, [cart])
 
-    console.log("To order: " + cart)
+    //console.log("To order: " + cart)
 
     const sendEmail = (e) => {
         e.preventDefault();
