@@ -266,37 +266,37 @@ export default function Home({ maerker, modeller, __type, side }) {
           `}
         `}>
           <p>Du er ved at bestille:</p>
-          <div className={scss.orderInner}>
-            { cart?.map((model, i) => (
-                <ul key={i} className={scss.ordreListe}>
-                  <li>{model.maerke.navn} {model.model}</li>
-                  <li>Varenummer: {model.varenummer.varenummer}</li>
-                  {models.length <= 1 &&
-                      <>
-                        <li>Årgang: {model.aar}</li>
-                        <li>For/bag: {model.forBag}</li>
-                        <li>Type:
-                          {model.typer === 'Alu_flad' ? ' Alu. (flad)' :
-                              model.typer === 'Plast_flad' ? ' Plast (flad)' :
-                                  model.typer === 'Plast_stoebt' ? ' Plast (støbt)' :
-                                      model.typer === 'Anden' ? ' Anden' : model.typer
-                          }
-                        </li>
-                        {model.kommentar && <li>{model.kommentar}</li>}
-                        {model.pris && <li>DKK {model.pris} ex. moms.</li>}
-                      </>
-                  }
-                </ul>
-            ))}
-          </div>
-          <button className={scss.videre} onClick={tilBestilling}>
-            Gå til bestillingssiden
-          </button>
-          <button
-              className={scss.anuller}
-              onClick={() => setShowOrder(false)}>
-            Annullér
-          </button>
+              <div className={scss.orderInner}>
+                { cart && cart.length > 0 ? cart.map((model, i) => (
+                    <ul key={i} className={scss.ordreListe}>
+                      <li>{model.maerke.navn} {model.model}</li>
+                      <li>Varenummer: {model.varenummer.varenummer}</li>
+                      {models.length <= 1 &&
+                          <>
+                            <li>Årgang: {model.aar}</li>
+                            <li>For/bag: {model.forBag}</li>
+                            <li>Type:
+                              {model.typer === 'Alu_flad' ? ' Alu. (flad)' :
+                                  model.typer === 'Plast_flad' ? ' Plast (flad)' :
+                                      model.typer === 'Plast_stoebt' ? ' Plast (støbt)' :
+                                          model.typer === 'Anden' ? ' Anden' : model.typer
+                              }
+                            </li>
+                            {model.kommentar && <li>{model.kommentar}</li>}
+                            {model.pris && <li>DKK {model.pris} ex. moms.</li>}
+                          </>
+                      }
+                    </ul>
+                )) : <div><br/>Ingen varer i kurven</div>}
+              </div>
+              <button className={scss.videre} onClick={tilBestilling}>
+                Gå til bestillingssiden
+              </button>
+              <button
+                  className={scss.anuller}
+                  onClick={() => setShowOrder(false)}>
+                Annullér
+              </button>
         </div>
         { !showOrder && cart &&
             <div className={scss.cartButton} onClick={() => setShowOrder(true)}>

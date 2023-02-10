@@ -18,7 +18,7 @@ export default function Header() {
         </div>
         <nav className={scss.nav}>
             <Link href={"/"}>
-                <a className={ router.pathname === '/' ? `${scss.active}` : ''}>Produkter</a>
+                <a className={ router.pathname === '/' ? `${scss.active}` : ''}>Inderskærme</a>
             </Link>
         </nav>
       </header>
