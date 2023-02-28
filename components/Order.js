@@ -23,10 +23,10 @@ function Order(cartData) {
             for (i; i < cart.length; i++) {
                 body += "Model: " + cart[i].maerke.navn;
                 body += " " + cart[i].model + "\n";
-                body += "Varenummer:" + cart[i].varenummer.varenummer + "\n";
-                body += "Årgang" + cart[i].aar + "\n";
-                body += "Type:" + cart[i].typer + "\n";
-                body += "For/Bag" + cart[i].forBag + "\n";
+                body += "Varenummer: " + cart[i].varenummer.varenummer + "\n";
+                body += "Årgang: " + cart[i].aar + "\n";
+                body += "Type: " + cart[i].typer + "\n";
+                body += "For/Bag: " + cart[i].forBag + "\n";
                 body += "\n"
             }
             setBodyText(body)
