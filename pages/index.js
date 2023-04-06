@@ -301,6 +301,7 @@ export default function Home({ maerker, modeller, __type, side }) {
         { !showOrder && cart &&
             <div className={scss.cartButton} onClick={() => setShowOrder(true)}>
               <ShoppingCart />
+              { cart.length > 0 && <div className={scss.amount}>{cart.length}</div>}
             </div>
         }
       </section>
