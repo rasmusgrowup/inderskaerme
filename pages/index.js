@@ -192,11 +192,16 @@ export default function Home({ maerker, modeller, __type, side }) {
             ? <div className={scss.listInner}>
               { filtered.filter((val) => {
                 if (searchTerm === "" && type === "") {
-                  return val
-                } else if (
-                  val.modeller.some(y => (y.typer.toLowerCase() === type.toLowerCase() || type === "") && (y.maerke.navn.toLowerCase() + ' ' + y.model.toLowerCase()).includes(searchTerm.toLowerCase()))
-                ) {
-                  return val
+                  return val;
+                }
+
+                const matchesFilter = val.modeller.some((y) =>
+                    (type === "" || y.typer.toLowerCase() === type.toLowerCase()) &&
+                    ((searchTerm === "") || (`${y.maerke.navn} ${y.model}`.toLowerCase().includes(searchTerm.toLowerCase())) || (y.varenummer.varenummer.toLowerCase().includes(searchTerm.toLowerCase())))
+                );
+
+                if (matchesFilter) {
+                  return val;
                 }
               }).map(({navn, id, modeller}) => (
                 <div className={scss.models} key={id} ref={listRef}>
@@ -214,7 +219,7 @@ export default function Home({ maerker, modeller, __type, side }) {
                       if (searchTerm === "" && type === "") {
                         return v
                       } else if (
-                        (v.typer.toLowerCase() === type.toLowerCase() || type === "") && (v.maerke.navn.toLowerCase() + ' ' + v.model.toLowerCase()).includes(searchTerm.toLowerCase())
+                        (v.typer.toLowerCase() === type.toLowerCase() || type === "") && ((v.maerke.navn.toLowerCase() + ' ' + v.model.toLowerCase()).includes(searchTerm.toLowerCase()) || (v.varenummer.varenummer.toLowerCase().includes(searchTerm.toLowerCase())))
                       ) {
                         return v
                       }
@@ -295,7 +300,7 @@ export default function Home({ maerker, modeller, __type, side }) {
               <button
                   className={scss.anuller}
                   onClick={() => setShowOrder(false)}>
-                Annullér
+                Minimér
               </button>
         </div>
         { !showOrder && cart &&

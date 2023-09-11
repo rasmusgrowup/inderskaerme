@@ -13,10 +13,21 @@ export default function Bestil() {
     const router = useRouter()
 
     const removeFromCart = (c) => {
-        const newCartData = cart.filter((item) => item !== c)
-        setCart(newCartData)
+        const itemIndex = cart.findIndex(item => item === c);
+        if (itemIndex !== -1) {
+            const updatedCart = [...cart];
+            if (updatedCart[itemIndex].quantity > 1) {
+                // If quantity is greater than 1, reduce it by 1
+                updatedCart[itemIndex].quantity -= 1;
+            } else {
+                // If quantity is 1 or less, remove the item from the cart
+                updatedCart.splice(itemIndex, 1);
+            }
+            setCart(updatedCart);
+        }
+
         if (cart.length === 1) {
-            router.push("/")
+            router.push("/");
         }
     }
 
