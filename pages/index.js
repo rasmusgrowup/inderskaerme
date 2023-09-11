@@ -130,7 +130,7 @@ export default function Home({ maerker, modeller, __type, side }) {
               <input
                 className={scss.searchBar}
                 type="text"
-                placeholder="Søg på mærke eller modelnavn"
+                placeholder="Mærke, model eller varenummer"
                 onChange={(event) => {
                   setSearchTerm(event.target.value);
                 }}
