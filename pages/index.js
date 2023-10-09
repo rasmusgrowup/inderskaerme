@@ -195,10 +195,27 @@ export default function Home({ maerker, modeller, __type, side }) {
                   return val;
                 }
 
-                const matchesFilter = val.modeller.some((y) =>
-                    (type === "" || y.typer.toLowerCase() === type.toLowerCase()) &&
-                    ((searchTerm === "") || (`${y.maerke.navn} ${y.model}`.toLowerCase().includes(searchTerm.toLowerCase())) || (y.varenummer.varenummer.toLowerCase().includes(searchTerm.toLowerCase())))
-                );
+                const matchesFilter = val.modeller.some((y) => {
+                  if (
+                      y &&
+                      y.typer &&
+                      y.maerke &&
+                      y.maerke.navn &&
+                      y.model &&
+                      y.varenummer &&
+                      y.varenummer.varenummer
+                  ) {
+                    return (
+                        (type === "" || y.typer.toLowerCase() === type.toLowerCase()) &&
+                        (searchTerm === "" ||
+                            (`${y.maerke.navn} ${y.model}`.toLowerCase().includes(
+                                    searchTerm.toLowerCase()
+                                ) ||
+                                y.varenummer.varenummer.toLowerCase().includes(searchTerm.toLowerCase())))
+                    );
+                  }
+                  return false; // Handle the case where any of the properties are null or undefined.
+                });
 
                 if (matchesFilter) {
                   return val;
@@ -217,11 +234,22 @@ export default function Home({ maerker, modeller, __type, side }) {
                   <div className={scss.row} ref={rowRef}>
                     { modeller.filter((v) => {
                       if (searchTerm === "" && type === "") {
-                        return v
+                        return v;
                       } else if (
-                        (v.typer.toLowerCase() === type.toLowerCase() || type === "") && ((v.maerke.navn.toLowerCase() + ' ' + v.model.toLowerCase()).includes(searchTerm.toLowerCase()) || (v.varenummer.varenummer.toLowerCase().includes(searchTerm.toLowerCase())))
+                          v.typer &&
+                          v.maerke &&
+                          v.maerke.navn &&
+                          v.model &&
+                          v.varenummer &&
+                          v.varenummer.varenummer
                       ) {
-                        return v
+                        if (
+                            (v.typer.toLowerCase() === type.toLowerCase() || type === "") &&
+                            ((v.maerke.navn.toLowerCase() + ' ' + v.model.toLowerCase()).includes(searchTerm.toLowerCase()) ||
+                                v.varenummer.varenummer.toLowerCase().includes(searchTerm.toLowerCase()))
+                        ) {
+                          return v;
+                        }
                       }
                     }).map((model) => (
                       <div
