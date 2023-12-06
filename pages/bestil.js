@@ -68,7 +68,7 @@ export default function Bestil() {
                   ? <span>I din kurv er {cart.length} sæt til i alt DKK {price} ekskl. moms.</span>
                   : <span>Ingen varer i kurven</span>
               }
-              <span>Fragt koster DKK 60,- i Danmark.</span>
+              <span>Fragt koster DKK 84,- i Danmark.</span>
           </div>
         <h2>Kontakt- og leveringsoplysninger</h2>
           <Order cartData={cart}/>
